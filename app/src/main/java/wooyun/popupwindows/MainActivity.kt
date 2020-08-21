@@ -33,14 +33,12 @@ class MainActivity : AppCompatActivity() {
             val fastBlur = Tools.fastBlur(activityShot, 0.5f, 50)
 
             val addPop = AddPopup(this)
-            addPop.show(tvTest)
+            addPop.show(tvTest!!)
 
             lvTest2!!.setOnClickListener {
                 lvTest1!!.visibility = View.VISIBLE
                 lvTest2!!.visibility = View.GONE
             }
-
-
             lvTest1!!.visibility = View.GONE
             lvTest2!!.visibility = View.VISIBLE
             lvTest2!!.background = BitmapDrawable(fastBlur)
