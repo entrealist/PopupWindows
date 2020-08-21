@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PopupWindows</string>
+    <string name="tv_test">测试一</string>
+    <string name="tv_test1">测试二</string>
+</resources>
