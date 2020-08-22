@@ -2,6 +2,7 @@ package wooyun.popupwindows.view
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,5 +36,12 @@ class AddPopup(context: Context?) : PopupWindow() {
         pop!!.isOutsideTouchable = true
         tv_test1 = view.findViewById(R.id.ll_test1)
         tv_test2 = view.findViewById(R.id.ll_test2)
+
+
+
+        pop!!.setOnDismissListener {
+            pop!!.dismiss()
+            pop!!.setBackgroundDrawable(ColorDrawable(0x00000000))
+        }
     }
 }

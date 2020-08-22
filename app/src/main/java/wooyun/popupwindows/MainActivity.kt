@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import wooyun.popupwindows.tools.Tools
 import wooyun.popupwindows.view.AddPopup
 
+
 class MainActivity : AppCompatActivity() {
+    private var lvTest: LinearLayout? = null
     private var tvTest: TextView? = null
     private var lvTest1: LinearLayout? = null
     private var lvTest2: LinearLayout? = null
@@ -27,26 +29,20 @@ class MainActivity : AppCompatActivity() {
         lvTest2 = findViewById(R.id.lv_test2)
     }
 
+
     private fun initView() {
         tvTest!!.setOnClickListener(View.OnClickListener {
-            val activityShot = Tools.activityShot(this)
-            val fastBlur = Tools.fastBlur(activityShot, 0.5f, 50)
-
+            val createViewBitmap = lvTest?.let { Tools.createViewBitmap(it) }
+            val fastBlur = createViewBitmap?.let { Tools.fastBlur(it, 0.5f, 50) }
             val addPop = AddPopup(this)
             addPop.show(tvTest!!)
-
-            lvTest2!!.setOnClickListener {
-                lvTest1!!.visibility = View.VISIBLE
-                lvTest2!!.visibility = View.GONE
-            }
-            lvTest1!!.visibility = View.GONE
-            lvTest2!!.visibility = View.VISIBLE
-            lvTest2!!.background = BitmapDrawable(fastBlur)
-
+            lvTest1!!.background = BitmapDrawable(fastBlur)
             addPop.tv_test1.setOnClickListener {
+                addPop.tv_test1.isEnabled = false
                 Toast.makeText(this@MainActivity, getString(R.string.tv_test), Toast.LENGTH_SHORT).show()
             }
             addPop.tv_test2.setOnClickListener {
+                addPop.tv_test2.isEnabled = false
                 Toast.makeText(this@MainActivity, getString(R.string.tv_test1), Toast.LENGTH_SHORT).show()
             }
         })

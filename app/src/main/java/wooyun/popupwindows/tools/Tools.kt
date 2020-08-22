@@ -2,9 +2,11 @@ package wooyun.popupwindows.tools
 
 import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Rect
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.View
 
 object Tools {
     /**
@@ -225,39 +227,12 @@ object Tools {
         return bitmap
     }
 
-    /**
-     * Activity bitmap截图
-     *
-     * @param activity 当前activity界面
-     * @return
-     */
-    fun activityShot(activity: Activity): Bitmap {
-        /*获取windows中最顶层的view*/
-        val view = activity.window.decorView
 
-        //允许当前窗口保存缓存信息
-        view.isDrawingCacheEnabled = true
-        view.buildDrawingCache()
-
-        //获取状态栏高度
-        val rect = Rect()
-        view.getWindowVisibleDisplayFrame(rect)
-        val statusBarHeight = rect.top
-        val windowManager = activity.windowManager
-
-        //获取屏幕宽和高
-        val outMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(outMetrics)
-        val width = outMetrics.widthPixels
-        val height = outMetrics.heightPixels
-
-        //去掉状态栏
-        val bitmap = Bitmap.createBitmap(view.drawingCache, 0, statusBarHeight, width,
-                height - statusBarHeight)
-
-        //销毁缓存信息
-        view.destroyDrawingCache()
-        view.isDrawingCacheEnabled = false
+    fun createViewBitmap(v: View): Bitmap? {
+        val bitmap = Bitmap.createBitmap(v.width, v.height,
+                Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        v.draw(canvas)
         return bitmap
     }
 }
